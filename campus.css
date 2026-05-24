@@ -1,0 +1,649 @@
+/* ==========================================
+   CAMPUS SHOWCASE / FACILITIES
+   ========================================== */
+.campus-showcase-section {
+    background-color: var(--bg-primary);
+}
+
+.facilities-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.facility-card {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.facility-image-box {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    position: relative;
+}
+
+.facility-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.facility-card:hover .facility-image-box img {
+    transform: scale(1.08);
+}
+
+.facility-tag {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 6px 14px;
+    background: rgba(13, 34, 64, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 15px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.facility-info {
+    padding: 30px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.facility-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.facility-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+@media (max-width: 991px) {
+    .facilities-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .facilities-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================
+   VIRTUAL TOUR SECTION (TERMINAL INTERACTIVE)
+   ========================================== */
+.virtual-tour-section {
+    background-color: var(--bg-secondary);
+}
+
+.tour-terminal {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+}
+
+/* Sidebar selectors */
+.tour-sidebar {
+    display: flex;
+    flex-direction: column;
+    background: rgba(15, 23, 42, 0.02);
+    border-right: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .tour-sidebar {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.tour-btn {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 30px;
+    border: none;
+    background: transparent;
+    text-align: left;
+    transition: var(--transition-smooth);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tour-btn:last-child {
+    border-bottom: none;
+}
+
+.tour-btn-num {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    transition: var(--transition-smooth);
+}
+
+.tour-btn-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.tour-btn-title {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary);
+    transition: var(--transition-smooth);
+}
+
+[data-theme="dark"] .tour-btn-title {
+    color: var(--text-primary);
+}
+
+.tour-btn-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Hover & Active States */
+.tour-btn:hover {
+    background: rgba(2, 132, 199, 0.03);
+}
+
+[data-theme="dark"] .tour-btn:hover {
+    background: rgba(56, 189, 248, 0.03);
+}
+
+.tour-btn.active {
+    background: var(--bg-secondary);
+    position: relative;
+}
+
+.tour-btn.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: var(--accent-blue);
+}
+
+.tour-btn.active .tour-btn-num {
+    color: var(--accent-blue);
+    transform: scale(1.1);
+}
+
+.tour-btn.active .tour-btn-title {
+    color: var(--accent-blue);
+}
+
+/* Tour Window (Image Display) */
+.tour-preview-window {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #000;
+}
+
+.tour-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tour-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(13, 34, 64, 0.85) 0%, rgba(13, 34, 64, 0.2) 65%, transparent 100%);
+    z-index: 2;
+}
+
+.tour-caption-box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px;
+    color: white;
+    z-index: 3;
+    transition: var(--transition-smooth);
+}
+
+.tour-caption-title {
+    font-size: 1.6rem;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.tour-caption-desc {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+}
+
+@media (max-width: 991px) {
+    .tour-terminal {
+        grid-template-columns: 1fr;
+    }
+    .tour-sidebar {
+        flex-direction: row;
+        overflow-x: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        scrollbar-width: none; /* Firefox */
+    }
+    .tour-sidebar::-webkit-scrollbar {
+        display: none; /* Safari & Chrome */
+    }
+    .tour-btn {
+        flex: 1 0 auto;
+        padding: 20px;
+        border-bottom: none;
+        border-right: 1px solid var(--border-color);
+    }
+    .tour-btn.active::before {
+        left: 0;
+        bottom: 0;
+        top: auto;
+        width: 100%;
+        height: 4px;
+    }
+}
+
+@media (max-width: 576px) {
+    .tour-btn {
+        padding: 15px;
+        gap: 10px;
+    }
+    .tour-btn-num {
+        font-size: 1.15rem;
+    }
+    .tour-btn-title {
+        font-size: 0.95rem;
+    }
+    .tour-caption-box {
+        padding: 20px;
+    }
+    .tour-caption-title {
+        font-size: 1.25rem;
+    }
+}
+
+/* ==========================================
+   UPCOMING EVENTS SECTION
+   ========================================== */
+.events-section {
+    background-color: var(--bg-primary);
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.event-card {
+    padding: 40px;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.event-date-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent-blue), var(--primary-light));
+    border-radius: 12px;
+    padding: 12px;
+    color: white;
+    width: 65px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(2, 132, 199, 0.2);
+}
+
+.event-day {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.event-month {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.event-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.event-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.event-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.event-reg-btn {
+    padding: 8px 18px;
+    font-size: 0.85rem;
+    border-radius: 20px;
+}
+
+@media (max-width: 991px) {
+    .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+    .event-card {
+        padding: 30px;
+    }
+}
+
+/* ==========================================
+   CONTACT & MAP SECTION
+   ========================================== */
+.contact-section {
+    background-color: var(--bg-secondary);
+}
+
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 50px;
+    align-items: stretch;
+}
+
+/* Contact Form Styles */
+.contact-form-container {
+    padding: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.form-heading {
+    font-size: 1.8rem;
+    margin-bottom: 35px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 576px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1.5px solid var(--border-color);
+    background: transparent;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    outline: none;
+    transition: var(--transition-smooth);
+}
+
+.input-group label {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    pointer-events: none;
+    transition: var(--transition-smooth);
+    background: transparent;
+    padding: 0 4px;
+}
+
+.input-group select {
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.input-group .select-label {
+    top: 50%;
+}
+
+/* Label floating behavior */
+.input-group input:focus ~ label,
+.input-group input:valid ~ label,
+.input-group select:focus ~ label,
+.input-group select:valid ~ label,
+.input-group textarea:focus ~ label,
+.input-group textarea:valid ~ label {
+    top: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+    background: var(--bg-secondary);
+    transform: translateY(-50%);
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.06);
+}
+
+.text-area-group label {
+    top: 24px;
+}
+
+.form-submit-btn {
+    align-self: flex-start;
+    padding: 15px 35px;
+}
+
+/* Success Banner */
+.form-success-alert {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-smooth);
+    z-index: 5;
+}
+
+.contact-form-container.success-active .contact-form {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+}
+
+.contact-form-container.success-active .form-success-alert {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%);
+}
+
+.success-icon-ring {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(34, 197, 94, 0.1);
+    border: 2px solid rgb(34, 197, 94);
+    color: rgb(34, 197, 94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    animation: scaleUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.success-title {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+
+[data-theme="dark"] .success-title {
+    color: var(--text-primary);
+}
+
+.success-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.success-reset-btn {
+    padding: 10px 24px;
+}
+
+@keyframes scaleUp {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Info Box & Map Columns */
+.contact-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.contact-details-box {
+    padding: 40px;
+}
+
+.info-box-title {
+    font-size: 1.4rem;
+    margin-bottom: 30px;
+}
+
+.info-card-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.info-card-item:last-child {
+    margin-bottom: 0;
+}
+
+.info-card-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: rgba(2, 132, 199, 0.06);
+    color: var(--accent-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.info-card-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.info-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+}
+
+.info-value {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Google Map Iframe Container */
+.contact-map-wrapper {
+    height: 280px;
+    overflow: hidden;
+    padding: 0;
+}
+
+.contact-map-wrapper iframe {
+    transition: filter 0.3s ease;
+}
+
+[data-theme="dark"] .contact-map-wrapper iframe {
+    filter: invert(90%) hue-rotate(180deg) grayscale(10%) contrast(90%);
+}
+
+@media (max-width: 991px) {
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+    }
+    .contact-form-container {
+        padding: 40px 30px;
+    }
+}
